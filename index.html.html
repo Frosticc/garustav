@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Tales of The Republic | Устав ВАР и Ликбезы</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg-main: #05070b;
+            --bg-card: #0c1118;
+            --bg-soft: #101722;
+            --accent: #f2c14f;
+            --accent-soft: rgba(242, 193, 79, 0.08);
+            --accent-strong: #f9d46f;
+            --text-main: #e7edf7;
+            --text-muted: #9ba4b8;
+            --border-soft: #202633;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top, #1b2535 0, #05070b 45%, #020308 100%);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.6;
+        }
+
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 16px 60px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(242, 193, 79, 0.35);
+            background: rgba(5, 7, 11, 0.85);
+            color: var(--accent);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .badge::before,
+        .badge::after {
+            content: "";
+            display: block;
+            width: 5px;
+            height: 5px;
+            border-radius: 999px;
+            background: var(--accent);
+        }
+
+        h1 {
+            margin: 18px 0 8px;
+            font-weight: 700;
+            font-size: 30px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .divider {
+            margin: 24px auto 20px;
+            width: 140px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent), transparent);
+            position: relative;
+        }
+
+        .divider::after {
+            content: "";
+            position: absolute;
+            inset: -5px 45%;
+            border-radius: 999px;
+            background: radial-gradient(circle, var(--accent) 0, transparent 65%);
+            opacity: 0.5;
+        }
+
+        /* Tabs */
+
+        .tabs {
+            display: inline-flex;
+            padding: 4px;
+            border-radius: 999px;
+            background: rgba(5, 7, 11, 0.9);
+            border: 1px solid var(--border-soft);
+            margin: 0 auto 18px;
+            gap: 4px;
+        }
+
+        .tabs-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .tab-button {
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            background: transparent;
+            transition: 0.16s ease;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .tab-button.active {
+            background: radial-gradient(circle at top, rgba(242, 193, 79, 0.2), transparent 65%);
+            color: var(--accent-strong);
+            box-shadow: 0 0 0 1px rgba(242, 193, 79, 0.5);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .toc {
+            background: rgba(5, 7, 11, 0.9);
+            border-radius: 16px;
+            border: 1px solid var(--border-soft);
+            padding: 16px 18px 14px;
+            margin-bottom: 20px;
+        }
+
+        .toc-title {
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 2px;
+        }
+
+        .toc a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 2px 0;
+        }
+
+        .toc a span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent-strong);
+            font-size: 11px;
+        }
+
+        .toc a:hover { color: var(--accent-strong); }
+
+        .section {
+            margin-bottom: 24px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(12, 17, 24, 0.96), rgba(6, 9, 14, 0.96));
+            border: 1px solid rgba(48, 58, 76, 0.9);
+            box-shadow:
+                0 18px 40px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(4, 8, 16, 0.8);
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 10px 18px;
+            border-bottom: 1px solid rgba(242, 193, 79, 0.28);
+            background: radial-gradient(circle at top left, rgba(242, 193, 79, 0.18), transparent 55%);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title span.code {
+            font-size: 12px;
+            padding: 1px 8px;
+            border-radius: 999px;
+            background: rgba(5, 7, 11, 0.9);
+            border: 1px solid rgba(242, 193, 79, 0.3);
+            text-transform: none;
+            letter-spacing: 0.04em;
+        }
+
+        .section-body { padding: 12px 18px 14px; }
+
+        h2, h3, h4 { margin: 10px 0 4px; }
+
+        h2 { font-size: 16px; }
+        h3 { font-size: 15px; }
+        h4 { font-size: 14px; }
+
+        p {
+            margin: 4px 0;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .muted {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        ul, ol {
+            margin: 4px 0 6px 18px;
+            padding-left: 0;
+            font-size: 14px;
+        }
+
+        li + li { margin-top: 2px; }
+
+        .sub-block {
+            margin-top: 6px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: var(--bg-soft);
+            border: 1px solid rgba(41, 50, 72, 0.9);
+        }
+
+        .note {
+            margin-top: 8px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: rgba(13, 19, 30, 0.95);
+            border: 1px dashed rgba(242, 193, 79, 0.4);
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        code {
+            font-family: "JetBrains Mono", Consolas, monospace;
+            font-size: 12px;
+            background: rgba(15, 22, 33, 0.9);
+            padding: 1px 4px;
+            border-radius: 4px;
+            border: 1px solid rgba(35, 45, 65, 0.9);
+        }
+
+        .examples {
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .examples p {
+            margin: 2px 0;
+            font-family: "JetBrains Mono", Consolas, monospace;
+            font-size: 12px;
+        }
+
+        .footer-note {
+            margin-top: 10px;
+            font-size: 12px;
+            text-align: right;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .page-wrapper { padding: 20px 10px 40px; }
+            .section { border-radius: 14px; }
+            .section-header { padding: 8px 14px; }
+            .section-body { padding: 10px 14px 12px; }
+            .tabs { width: 100%; justify-content: space-between; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <header class="header">
+        <div class="badge">Tales of The Republic • CWRP</div>
+        <h1>Устав ВАР и Ликбезы</h1>
+        <div class="subtitle">
+            Официальный устав Великой Армии Республики и обучающий раздел по RP.
+        </div>
+        <div class="divider"></div>
+    </header>
+
+    <div class="tabs-wrapper">
+        <div class="tabs">
+            <button class="tab-button active" data-tab="tab-ustav">Устав</button>
+            <button class="tab-button" data-tab="tab-likbezy">Ликбезы</button>
+        </div>
+    </div>
+
+    <!-- TAB: Устав -->
+    <div id="tab-ustav" class="tab-content active">
+
+        <nav class="toc">
+            <div class="toc-title">Содержание — Устав</div>
+            <ul>
+                <li><a href="#golden-rules"><span>I</span>Золотые правила</a></li>
+                <li><a href="#duties-rights"><span>II</span>Обязанности и права всех единиц ВАР</a></li>
+                <li><a href="#formation-behavior"><span>III</span>Правила поведения в строю</a></li>
+                <li><a href="#lexicon"><span>IV</span>Воинский лексикон и субординация</a></li>
+                <li><a href="#base-function"><span>V</span>Уставные правила функционирования военного объекта</a></li>
+                <li><a href="#agitation"><span>VI</span>Правила агитации</a></li>
+                <li><a href="#transfers"><span>VII</span>Система переводов</a></li>
+                <li><a href="#exit-entry"><span>VIII</span>Выход/вход за территорию базы и техники</a></li>
+                <li><a href="#guard-duty"><span>IX</span>Постовая служба</a></li>
+                <li><a href="#arsenal"><span>X</span>Правила Арсенала</a></li>
+                <li><a href="#weapons-jetpack"><span>XI</span>Регламент ношения оружия и джетпака</a></li>
+                <li><a href="#formations"><span>XII</span>Виды построений</a></li>
+                <li><a href="#codes-defcons"><span>XIII</span>Коды на базе и дефконы</a></li>
+                <li><a href="#command-duties"><span>XIV</span>Обязанности и полномочия командования и бойцов</a></li>
+                <li><a href="#restricted-areas"><span>XV</span>Места с ограниченным доступом</a></li>
+                <li><a href="#safety"><span>XVI</span>Техника безопасности</a></li>
+                <li><a href="#training-complex"><span>XVII</span>Правила тренировочного комплекса</a></li>
+                <li><a href="#ranks"><span>XVIII</span>Система званий</a></li>
+                <li><a href="#mercenaries"><span>XIX</span>Регламент наёмников</a></li>
+            </ul>
+        </nav>
+
+        <!-- I. Золотые правила -->
+        <section class="section" id="golden-rules">
+            <div class="section-header">
+                <div class="section-title">
+                    Золотые правила
+                    <span class="code">Раздел 1</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <ul>
+                        <li>Не причинять вред союзным бойцам без веских оснований (угроза жизни, подавление нарушителя устава, действия военной полиции и тех, кто временно исполняет её обязанности).</li>
+                        <li>Исполнять приказы старших по званию и должности. Приказы отдают только те, чья должность/звание выше в вашем формировании (отдельно — высшее командование).</li>
+                        <li>При отсутствии старшего в подразделении ответственность за бойцов может взять на себя JSG+ из другого подразделения.</li>
+                        <li>Относиться к сослуживцам уважительно и не провоцировать конфликты, как внутри, так и между подразделениями.</li>
+                        <li>Соблюдать субординацию и воинский лексикон.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- II. Обязанности и права -->
+        <section class="section" id="duties-rights">
+            <div class="section-header">
+                <div class="section-title">
+                    Обязанности и права всех единиц ВАР
+                    <span class="code">Раздел 2</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <ul>
+                        <li>Строго соблюдать устав и не мешать работе уполномоченных лиц.</li>
+                        <li>Защищать интересы Республики, развивать свои боевые навыки и поддерживать моральный дух сослуживцев.</li>
+                        <li>Выполнять приказы старших по званию. Приказ, противоречащий уставу, не подлежит исполнению — об этом необходимо доложить ВП или высшему командованию.</li>
+                        <li>Знать звания, должности и отличительные признаки своих командиров.</li>
+                        <li>По запросу командования, штаба или военной полиции сообщать всю известную информацию по делу.</li>
+                        <li>Не раскрывать секретные сведения тем, кто не имеет права их знать (кроме высшего командования и ВП).</li>
+                        <li>При объявлении тревоги (красного кода) участвовать в обороне объекта и занимать важные точки по приказу.</li>
+                        <li>Иметь право перевода в другое подразделение по собственному желанию после установленного срока службы по регламенту.</li>
+                        <li>Иметь право применять оружие для защиты охраняемых объектов, техники, вооружения и жизни бойцов Республики.</li>
+                        <li>Иметь право на обращение к своему командованию или в штаб.</li>
+                        <li>Обязан уважительно относиться к мирным жителям и иным мирным формам жизни, оказывать им помощь.</li>
+                        <li>Запрещено лгать военной полиции и бойцам ВАР, давать ложные показания.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- III. Поведение в строю -->
+        <section class="section" id="formation-behavior">
+            <div class="section-header">
+                <div class="section-title">
+                    Правила поведения в строю
+                    <span class="code">Раздел 3</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <ul>
+                        <li>По объявлению сбора явиться на указанное место в установленный промежуток времени.</li>
+                        <li>Внимательно слушать и выполнять задачи, которые озвучивает командир или старший по званию.</li>
+                        <li>В строю стоять по стойке «смирно»: не крутиться, не прыгать, не приседать, не вертеть головой.</li>
+                        <li>Не разговаривать в строю без разрешения лица, проводящего строй.</li>
+                        <li>Вставать в строй только с разрешения ответственного за строй.</li>
+                        <li>Воинское приветствие выполняется по команде или с разрешения старшего.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- IV. Лексикон и субординация -->
+        <section class="section" id="lexicon">
+            <div class="section-header">
+                <div class="section-title">
+                    Воинский лексикон и субординация
+                    <span class="code">Раздел 4</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <p><strong>Воинский лексикон</strong> — установленный порядок официального общения между военнослужащими.</p>
+                    <p><strong>Субординация</strong> — безусловное подчинение младших по званию старшим.</p>
+                </div>
+                <div class="sub-block">
+                    <h3>4.1. Дисциплина и этикет</h3>
+                    <ul>
+                        <li>Запрещено перебивать старших по званию.</li>
+                        <li>Не кричать, не вести себя вызывающе (кроме RP-сцен, где это предусмотрено).</li>
+                        <li>Использовать общегалактический язык в официальном общении.</li>
+                        <li>Исполнять воинское приветствие при обращении к старшим; младшие приветствуют первыми.</li>
+                        <li>При разговоре со старшим держать руки по швам и сохранять собранный вид.</li>
+                        <li>Избегать конфликтов, не повышать голос на сослуживцев.</li>
+                        <li>Не использовать нецензурную лексику и «неуставный» сленг.</li>
+                        <li>Соблюдать установленный дресс-код своего подразделения.</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>4.2. Примеры воинской лексики</h3>
+                    <ul>
+                        <li>«Да» — «Так точно».</li>
+                        <li>«Нет» — «Никак нет».</li>
+                        <li>«Не знаю» — «Не могу знать».</li>
+                        <li>«Можно?» — «Разрешите».</li>
+                        <li>«Можно обратиться?» — «Разрешите обратиться, [звание]».</li>
+                        <li>«Можно идти?» — «Разрешите идти».</li>
+                        <li>Извинение — «Виноват, исправлюсь».</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>4.3. Доклад вне боя</h3>
+                    <ol>
+                        <li>Получить разрешение на обращение.</li>
+                        <li>Получить разрешение на доклад.</li>
+                        <li>Исполнить приветствие и назвать позывной, номер и звание.</li>
+                        <li>Кратко и чётко изложить суть действий / события.</li>
+                        <li>Завершить фразой «Доклад окончен» и запросить разрешение вернуться в строй или быть свободным.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- V. Функционирование объекта -->
+        <section class="section" id="base-function">
+            <div class="section-header">
+                <div class="section-title">
+                    Уставные правила функционирования военного объекта
+                    <span class="code">Раздел 5</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <h3>5.1. Выход за базу и аванпост</h3>
+                    <ul>
+                        <li>Самовольный выход/вход за территорию базы или аванпоста запрещён без разрешения военной полиции, если иное не предусмотрено статусом подразделения.</li>
+                        <li>Ряд подразделений (БСО, джедаи, высшее командование и др.) могут выходить по уведомлению, но обязаны информировать охрану.</li>
+                        <li>Проход на аванпост согласуется с закреплённым за ним составом (кроме отдельных исключений для ВК/ВП).</li>
+                        <li>При обнаружении неизвестного объекта или гражданских необходимо организовать оцепление на безопасной дистанции и вызвать гвардию / подкрепление.</li>
+                        <li>Командир группы несёт основную ответственность за безопасность базы.</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>5.2. База и стратегические точки</h3>
+                    <ul>
+                        <li>К ключевым точкам относятся штаб, главные ворота, казармы, арсенал, медблок, генераторная, ВПП и др.</li>
+                        <li>На стратегических объектах по решению командования выставляются посты.</li>
+                        <li>Выдачей постов и патрулей занимаются сержанты гвардии и командование подразделений.</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>5.3. Безопасность на базе</h3>
+                    <ul>
+                        <li>Попытка скрыться от задержания приравнивается к дезертирству.</li>
+                        <li>Обжалование ареста возможно через высшее командование.</li>
+                        <li>При наличии ордера задержание или обыск возможны в любом месте, включая мероприятия.</li>
+                        <li>При обыске боец обязан принять позицию, удобную для проверки; отказ может повлечь задержание.</li>
+                        <li>Высшее командование и командирский состав гвардии могут временно отстранять от должности до разбирательства.</li>
+                        <li>Проверку на дефектность проводит медперсонал; тяжёлые дефекты могут караться вплоть до ликвидации персонажа по внутренним RP-процедурам.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- VI. Агитация -->
+        <section class="section" id="agitation">
+            <div class="section-header">
+                <div class="section-title">
+                    Правила агитации
+                    <span class="code">Раздел 6</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <ul>
+                        <li>Самостоятельная агитация и набор в подразделения без присутствия уполномоченного офицера/командира запрещены.</li>
+                        <li>Агитацию проводят представители командования или назначенные ими лица.</li>
+                        <li>Проводится в специально отведённой зоне (плац, казарма, зал агитации) в согласованное время.</li>
+                        <li>Ответственный собирает новобранцев в обозначенной точке; опоздавшие не допускаются.</li>
+                        <li>Каждому подразделению даётся ограниченное время на рассказ о задачах, роли и структуре.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- VII. Переводы -->
+        <section class="section" id="transfers">
+            <div class="section-header">
+                <div class="section-title">
+                    Система переводов
+                    <span class="code">Раздел 7</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <ul>
+                        <li><strong>Рядовой состав:</strong> переводы между подразделениями без понижения в звании, с ограничением по частоте.</li>
+                        <li>Переходы между базовыми званиями (PVT, PFC, SPC, CPL) имеют минимальные интервалы по времени службы.</li>
+                        <li><strong>Сержантский состав:</strong> при переводе — понижение на один ранг; переводы доступны реже.</li>
+                        <li><strong>Младший офицерский состав:</strong> при переводе возможны понижения на 2–3 звания; интервалы увеличены.</li>
+                        <li><strong>Старший офицерский и командирский состав:</strong> при переводе чаще всего откатывается до младших офицерских званий по решению штаба.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIII. Выход/вход и техника -->
+        <section class="section" id="exit-entry">
+            <div class="section-header">
+                <div class="section-title">
+                    Выход/вход за территорию базы и техники
+                    <span class="code">Раздел 8</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <h3>8.1. Общие запросы</h3>
+                    <ul>
+                        <li>Любой выход/вход оформляется либо запросом, либо уведомлением по установленной форме.</li>
+                        <li>При наличии охраны старший по званию запрашивает разрешение, указывая состав, технику и цель.</li>
+                        <li>При отсутствии охраны оформляется уведомление с теми же данными.</li>
+                        <li>При особых кодах допускается выход за базу без предварительных запросов.</li>
+                        <li>Минимальный состав выхода за базу для клонов — два бойца и старший (обычно CPL+).</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>8.2. Воздушная техника</h3>
+                    <ul>
+                        <li>Для взлёта/посадки указываются пилот/звено, тип техники, площадка, состав и цель.</li>
+                        <li>Применяются отдельные коды для взлёта, посадки и экстренных ситуаций.</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>8.3. Наземная техника</h3>
+                    <ul>
+                        <li>Для выезда/заезда указывается база/аванпост, тип машины, состав и цель.</li>
+                        <li>Используются коды для выезда/заезда и отдельная маркировка для тяжёлой, средней, лёгкой техники и классов.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- IX. Постовая служба -->
+        <section class="section" id="guard-duty">
+            <div class="section-header">
+                <div class="section-title">
+                    Постовая служба
+                    <span class="code">Раздел 9</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <ul>
+                        <li>Поставить на пост может клон своего формирования со звания CPL+ или представитель высшего командования.</li>
+                        <li>На одном посту может находиться от 1 до 4 бойцов звания PVT+.</li>
+                        <li>JSG+ может самостоятельно заступить на пост, уведомив об этом своё формирование.</li>
+                        <li>Постовой отвечает за безопасность поста и пропускной режим.</li>
+                        <li>Оружие на посту держится в оглушающем режиме на предохранителе до появления угрозы.</li>
+                        <li>Постовой не вправе самовольно уходить с поста без уведомления или приказа.</li>
+                        <li>При проверке могут требовать снятия шлема и предъявления удостоверения; для отдельных категорий действуют упрощённые проверки.</li>
+                        <li>При отказе от проверки и продолжении движения постовой вправе применить оглушение и вызвать ВП, при угрозе жизни — боевой режим.</li>
+                        <li>Один пост обычно засчитывается как 30 минут службы; максимум — до двух часов подряд.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- X. Арсенал -->
+        <section class="section" id="arsenal">
+            <div class="section-header">
+                <div class="section-title">
+                    Правила Арсенала
+                    <span class="code">Раздел 10</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <ul>
+                        <li>Вход в арсенал разрешён только с прямым разрешением постового или ответственного за арсенал.</li>
+                        <li>Проникновение без разрешения считается нарушением и может привести к задержанию.</li>
+                        <li>На входе требуется удостовериться в личности: снять шлем, предъявить IDN (кроме жёстких боевых ситуаций).</li>
+                        <li>Перед сменой поста у арсенала новый постовой также проходит идентификацию.</li>
+                        <li>Оружие выдаётся в сопровождении старшего по званию, не ниже установленного ранга.</li>
+                        <li>Нарушения правил пользования арсеналом ведут к дисциплинарным мерам, вплоть до ограничения доступа.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- XI. Оружие и джетпак -->
+        <section class="section" id="weapons-jetpack">
+            <div class="section-header">
+                <div class="section-title">
+                    Регламент ношения оружия и джетпака
+                    <span class="code">Раздел 11</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <h3>11.1. Ношение оружия по кодам</h3>
+                    <ul>
+                        <li><strong>Зелёный код:</strong> оружие за спиной на предохранителе (кроме патрулей/постов).</li>
+                        <li><strong>Жёлтый код:</strong> оружие в руках, но на предохранителе.</li>
+                        <li><strong>Красный код:</strong> оружие в руках, разрешён боевой режим без отдельного приказа.</li>
+                        <li>Оружие в руках также разрешено при сопровождении важных лиц, боевых вылетах, тренировках и патрулях по приказу старших.</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>11.2. Реактивный ранец (джетпак)</h3>
+                    <ul>
+                        <li>Использование джетпака без причины запрещено.</li>
+                        <li>Пользователь обязан следить за запасом топлива и безопасностью полёта.</li>
+                        <li>Запрещено применять джетпак на скрытных операциях.</li>
+                        <li>При зелёном и жёлтом кодах использование ограничено и допускается только при прямой угрозе жизни или по спецзадаче.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- XII. Построения -->
+        <section class="section" id="formations">
+            <div class="section-header">
+                <div class="section-title">
+                    Виды построений
+                    <span class="code">Раздел 12</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <p>Построения делятся на боевые, небоевые и сопровождающие.</p>
+                </div>
+                <div class="sub-block">
+                    <h3>12.1. Боевые построения</h3>
+                    <ul>
+                        <li><strong>Клин</strong> — для прорыва обороны противника.</li>
+                        <li><strong>Замкнутый клин</strong> — для узких помещений и коридоров.</li>
+                        <li><strong>Разомкнутый клин</strong> — для открытой местности.</li>
+                        <li><strong>Альфа</strong> — шахматное построение для ведения огня.</li>
+                        <li><strong>Боевая стена</strong> — для удержания позиций и усиления фронтального огня.</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>12.2. Небоевые построения</h3>
+                    <ul>
+                        <li><strong>Шеренга</strong> — один или несколько рядов.</li>
+                        <li><strong>Колонна</strong> — один или несколько столбцов.</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>12.3. Сопровождающие построения</h3>
+                    <ul>
+                        <li>Построение вокруг ВИП-а для его защиты.</li>
+                        <li>Построение при конвоировании/удержании заложников.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- XIII. Коды и дефконы -->
+        <section class="section" id="codes-defcons">
+            <div class="section-header">
+                <div class="section-title">
+                    Коды на базе и дефконы
+                    <span class="code">Раздел 13</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <h3>13.1. Коды на базе</h3>
+                    <ul>
+                        <li><strong>Зелёный код:</strong> обстановка спокойная.</li>
+                        <li><strong>Жёлтый код:</strong> повышенная готовность, оружие на предохранителе.</li>
+                        <li><strong>Красный код:</strong> военное положение, разрешён боевой огонь по угрозам.</li>
+                        <li><strong>Чёрный код:</strong> немедленная эвакуация.</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>13.2. Дефконы</h3>
+                    <ul>
+                        <li>Defcon 0 — подготовка к вылету/выдвижению на миссию.</li>
+                        <li>Defcon 1 — экстренная эвакуация.</li>
+                        <li>Defcon 2 — приоритетная оборона критически важных зон.</li>
+                        <li>Defcon 3 — ожидание атаки, распределение по боевым постам.</li>
+                        <li>Defcon 4 — активное патрулирование малыми группами.</li>
+                        <li>Defcon 5 — максимальная боевая готовность.</li>
+                        <li>Defcon 6 — штатный режим работы базы.</li>
+                        <li>Defcon FIX — технические работы.</li>
+                        <li>Defcon MED — медосмотр.</li>
+                        <li>Defcon T — карантин и опасность заражения.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- XIV. Обязанности командования -->
+        <section class="section" id="command-duties">
+            <div class="section-header">
+                <div class="section-title">
+                    Обязанности и полномочия командования и бойцов
+                    <span class="code">Раздел 14</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <h3>Высшее командование</h3>
+                    <ul>
+                        <li>Руководит секторными армиями и крупными соединениями.</li>
+                        <li>Имеет расширенные полномочия по управлению составом.</li>
+                        <li>Может принимать командование при защите объекта.</li>
+                        <li>Обладает правом повышать и понижать бойцов в рамках устава.</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>Командир подразделения</h3>
+                    <ul>
+                        <li>Несёт ответственность за своих бойцов.</li>
+                        <li>Обязан обучать и развивать личный состав.</li>
+                        <li>Отбирает бойцов на высокие звания и должности.</li>
+                        <li>Принимает командование объектом в рамках иерархии.</li>
+                        <li>Командует на боевых операциях и регулирует вылеты.</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>Заместитель командира</h3>
+                    <ul>
+                        <li>Замещает командира при его отсутствии.</li>
+                        <li>Следит за дисциплиной и работой состава.</li>
+                        <li>Командует операциями по поручению командира.</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>Бойцы</h3>
+                    <ul>
+                        <li>Выбирают воинское подразделение и проходят службу в его составе.</li>
+                        <li>Имеют право применять оружие для защиты себя, сослуживцев и интересов Республики.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- XV. Ограниченные зоны -->
+        <section class="section" id="restricted-areas">
+            <div class="section-header">
+                <div class="section-title">
+                    Места с ограниченным доступом
+                    <span class="code">Раздел 15</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <ul>
+                        <li>Штаб — доступ для ВП, офицеров и командования.</li>
+                        <li>Генераторная — доступ для ENG, ARC, RC, ВП.</li>
+                        <li>КПЗ — доступ по сопровождению ВП (кроме высшего командования).</li>
+                        <li>Серверная — ENG, ARC, RC, ВП.</li>
+                        <li>Арсенал — вход с установленного звания.</li>
+                        <li>Академия — учебная зона, доступна CPL+ и выше для занятий.</li>
+                        <li>Храм джедаев — только с разрешения Ордена; территория храма считается запретной.</li>
+                        <li>Медблок — по необходимости лечения или с сопровождением.</li>
+                        <li>Допросная — исключительно для военной полиции.</li>
+                        <li>Казармы подразделений — только для бойцов соответствующего ЛБК (ВП при задержании — исключение).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- XVI. Техника безопасности -->
+        <section class="section" id="safety">
+            <div class="section-header">
+                <div class="section-title">
+                    Техника безопасности
+                    <span class="code">Раздел 16</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <ul>
+                        <li>Запрещено без необходимости находиться на крышах зданий и сооружений.</li>
+                        <li>Не щёлкать предохранителем ради развлечения.</li>
+                        <li>Не использовать оружие на территории объекта без причины.</li>
+                        <li>Не разрушать конструкции и элементы комплекса.</li>
+                        <li>Не наводить оружие на клонов в боевом режиме без веской причины.</li>
+                        <li>Оружие должно быть на предохранителе, если иное не предусмотрено кодом/приказом.</li>
+                        <li>На стрельбище запрещено заходить в зону мишеней и мешать тренирующимся.</li>
+                        <li>При взлёте и посадке воздушной техники запрещено находиться на ВПП.</li>
+                        <li>Запрещено без причины использовать джетпак при зелёном и жёлтом кодах.</li>
+                        <li>Любое применение оружия без причины на базе запрещено (кроме боевых кодов, тренировок, задержаний и т.п.).</li>
+                        <li>Особый режим пропуска действует для КПЗ, генераторной, медблока и штаба.</li>
+                        <li>В общественных зонах избегать прыжков, лежания, постоянных приседаний и прочего неуставного поведения.</li>
+                        <li>Правила распространяются и на членов Ордена Джедаев.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- XVII. Тренировочный комплекс -->
+        <section class="section" id="training-complex">
+            <div class="section-header">
+                <div class="section-title">
+                    Правила тренировочного комплекса
+                    <span class="code">Раздел 17</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <p>К тренировочному комплексу относятся стрельбища, симуляционные залы, «пески», полосы препятствий и другие тренировочные зоны.</p>
+                    <ul>
+                        <li>В спокойном режиме действует жёлтый код готовности.</li>
+                        <li>Занимать стрельбище могут бойцы с определённого звания с отметкой в рацию.</li>
+                        <li>Посещать полосу препятствий можно свободно, если она не занята под официальную тренировку.</li>
+                        <li>Посещение комплекса без старшего по званию (CPL+) не допускается.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- XVIII. Звания -->
+        <section class="section" id="ranks">
+            <div class="section-header">
+                <div class="section-title">
+                    Система званий
+                    <span class="code">Раздел 18</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <h3>Рядовой состав</h3>
+                    <ul>
+                        <li>Рекрут (TRP)</li>
+                        <li>Рядовой (PVT)</li>
+                        <li>Рядовой второго класса (PV2)</li>
+                        <li>Рядовой первого класса (PV1)</li>
+                        <li>Специалист (SPC)</li>
+                        <li>Капрал (CPL)</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>Сержантский состав</h3>
+                    <ul>
+                        <li>Младший сержант (JSG)</li>
+                        <li>Сержант (SGT)</li>
+                        <li>Мастер-сержант (MSG)</li>
+                        <li>Старший сержант (SSG)</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>Младший офицерский состав</h3>
+                    <ul>
+                        <li>Младший лейтенант (JLT)</li>
+                        <li>Лейтенант (LT)</li>
+                        <li>Старший лейтенант (SLT)</li>
+                        <li>Капитан (CPT)</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>Офицерский и командирский состав</h3>
+                    <ul>
+                        <li>Майор (MAJ)</li>
+                        <li>Полковник (COL)</li>
+                        <li>Клон-коммандер (СС)</li>
+                        <li>Маршал-коммандер (MC)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- XIX. Наёмники -->
+        <section class="section" id="mercenaries">
+            <div class="section-header">
+                <div class="section-title">
+                    Регламент наёмников
+                    <span class="code">Раздел 19</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <ul>
+                        <li>Вступление в ряды ВАР для наёмников оформляется через контракт с высшим командованием или военной полицией.</li>
+                        <li>После подписания контракта наёмник приписывается к определённому ЛБК и обязан соблюдать его устав.</li>
+                        <li>Существуют подразделения, к которым наёмники не могут быть приписаны (например, БСО, ВП, высшее командование).</li>
+                        <li>Максимальное звание наёмника в структуре ВАР обычно ограничено.</li>
+                        <li>Наёмник обязан выполнять задачи по контракту, сохранять дисциплину и демонстрировать боевую пригодность.</li>
+                    </ul>
+                </div>
+                <div class="footer-note">
+                    Устав ВАР обязателен к соблюдению всеми бойцами, командирами и наёмниками.
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- TAB: Ликбезы -->
+    <div id="tab-likbezy" class="tab-content">
+
+        <nav class="toc">
+            <div class="toc-title">Содержание — Ликбезы</div>
+            <ul>
+                <li><a href="#likbez-1"><span>I</span>Ликбез №1 — Основы RP и типы информации</a></li>
+                <li><a href="#likbez-2"><span>II</span>Ликбез №2 — RP и Non-RP чаты</a></li>
+                <li><a href="#likbez-3"><span>III</span>Ликбез №3 — /me, /it, /try, /roll</a></li>
+                <li><a href="#likbez-4"><span>IV</span>Ликбез №4 — Памятки и RP-смерти</a></li>
+            </ul>
+        </nav>
+
+        <!-- XX. Ликбез №1 -->
+        <section class="section" id="likbez-1">
+            <div class="section-header">
+                <div class="section-title">
+                    Ликбез №1 — Основы RP и типы информации
+                    <span class="code">Ликбез</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <h3>1. Голосовой и текстовой чат</h3>
+                    <p><strong>Голосовой чат</strong> — взаимодействие с игроками от лица персонажа с использованием микрофона. Всё, что вы говорите в RP-зоне голосом, считается IC.</p>
+                    <p><strong>Текстовой чат</strong> — взаимодействие от лица персонажа через текст. Обычное сообщение без префиксов — речь персонажа.</p>
+                    <p class="muted">
+                        Нельзя использовать в RP информацию, полученную вне игры (Discord, личка, мета-информация).
+                    </p>
+                </div>
+                <div class="sub-block">
+                    <h3>2. Виды информации</h3>
+                    <p><strong>In Character (IC)</strong> — то, что персонаж может узнать в мире игры.</p>
+                    <ul>
+                        <li>услышали приказ;</li>
+                        <li>увидели противника или объект;</li>
+                        <li>получили данные по связи.</li>
+                    </ul>
+                    <p><strong>Out Of Character (OOC)</strong> — информация из реальной жизни, не доступная персонажу.</p>
+                    <p><strong>Local Out Of Character (LOOC)</strong> — локальный OOC-чат (тех. моменты, лаги, «отойду»).</p>
+                    <p><strong>RolePlay (RP)</strong> — игра, где вы действуете так, как поступил бы живой человек на месте персонажа в рамках лора.</p>
+                </div>
+                <div class="sub-block">
+                    <h3>3. Общие принципы</h3>
+                    <ul>
+                        <li>Голос и текст в RP-каналах — это ваш персонаж, а не вы IRL.</li>
+                        <li>Не переносите в RP то, что персонаж узнать не мог.</li>
+                        <li>Нужно выйти из сцены по IRL-причине — сообщите через <code>/ooc</code> или <code>/looc</code>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- XXI. Ликбез №2 -->
+        <section class="section" id="likbez-2">
+            <div class="section-header">
+                <div class="section-title">
+                    Ликбез №2 — RP и Non-RP чаты
+                    <span class="code">Ликбез</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <h3>1. RP-чаты</h3>
+                    <ul>
+                        <li>Обычный текст — речь персонажа.</li>
+                        <li><code>/w</code> — шёпот (виден только рядом).</li>
+                        <li><code>/y</code> — крик (увеличенный радиус).</li>
+                        <li><code>/ad</code> — RP-объявления на весь сервер.</li>
+                        <li><code>/ff</code> — RP-связь между фракциями.</li>
+                        <li><code>/f</code> — RP-связь внутри фракции.</li>
+                        <li><code>/al</code> — RP-чат всей стороны конфликта.</li>
+                        <li><code>/rp</code> — глобальные RP-отыгровки (часто с <code>/me</code>, <code>/it</code>).</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>2. Non-RP (OOC) чаты</h3>
+                    <ul>
+                        <li><code>/ooc</code> — общий не RP-чат.</li>
+                        <li><code>/looc</code> — локальный OOC рядом с вами.</li>
+                        <li><code>/pm</code> — личные сообщения, которые нельзя использовать в RP.</li>
+                        <li><code>/org</code> — OOC-чат организации (управление, оргвопросы).</li>
+                    </ul>
+                </div>
+                <div class="sub-block">
+                    <h3>3. Когда использовать OOC / LOOC</h3>
+                    <p>Используйте <code>/ooc</code> или <code>/looc</code>, если нужно:</p>
+                    <ul>
+                        <li>объяснить лаги/вылеты;</li>
+                        <li>попросить подождать;</li>
+                        <li>сообщить, что вы вынуждены прервать RP;</li>
+                        <li>задать технический вопрос по игре.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- XXII. Ликбез №3 -->
+        <section class="section" id="likbez-3">
+            <div class="section-header">
+                <div class="section-title">
+                    Ликбез №3 — Отыгровки: /me, /it, /try, /roll
+                    <span class="code">Ликбез</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <h3>1. Команда /me</h3>
+                    <p><code>/me</code> описывает действия персонажа от первого лица.</p>
+                    <ul>
+                        <li>В одном <code>/me</code> — не более двух действий.</li>
+                        <li>Нельзя игнорировать отыгровки <code>/me</code>, направленные к вашему персонажу.</li>
+                        <li>После <code>/me</code> текст пишется с маленькой буквы.</li>
+                        <li>Если кто-то начал писать RP-команду — дождитесь, пока он закончит.</li>
+                        <li>Не начинайте длинные RP-ситуации, если у вас мало времени.</li>
+                        <li>Запрещены «рандомы» в стиле 1/10 внутри <code>/me</code>.</li>
+                    </ul>
+                    <div class="examples">
+                        <p>/me открыл кобуру и достал пистолет</p>
+                        <p>/me снял пистолет с предохранителя</p>
+                        <p>/me навел пистолет на противника</p>
+                        <p>/me нажал пальцем на спусковой курок дважды, а после опустил пистолет</p>
+                        <p>/me глубоко вздохнул и поставил пистолет на предохранитель</p>
+                        <p>/me засунул пистолет в кобуру и закрыл ее</p>
+                    </div>
+                </div>
+                <div class="sub-block">
+                    <h3>2. Команда /it</h3>
+                    <p><code>/it</code> описывает окружение и ситуацию от третьего лица.</p>
+                    <ul>
+                        <li>После <code>/it</code> текст начинается с большой буквы.</li>
+                        <li>Каждая отыгровка через <code>/it</code> заканчивается точкой.</li>
+                        <li>Нельзя через <code>/it</code> выяснять фракцию/расу и т.п.</li>
+                        <li>Нельзя описывать за другого игрока его состояние и действия.</li>
+                        <li>Нельзя отыгрывать поддельные документы/деньги без RP-получения.</li>
+                        <li>Описание в <code>/it</code> должно быть правдивым относительно сцены.</li>
+                    </ul>
+                    <div class="examples">
+                        <p>/it Перед глазами видна дверь, замок которой был сломан.</p>
+                        <p>/it Проведя глазами вдоль коридора, он двинулся в сторону двери.</p>
+                        <p>/it Продолжая осматривать комнату, направился к окну.</p>
+                        <p>/it На окне заметен неизвестный декоративный предмет, покрытый пылью.</p>
+                        <p>/it Понимая, что в квартире уже давно никто не живет, он направился к выходу и закрыл дверь.</p>
+                    </div>
+                </div>
+                <div class="sub-block">
+                    <h3>3. Команда /try</h3>
+                    <p><code>/try</code> — попытка сделать действие с возможным успехом или провалом.</p>
+                    <ul>
+                        <li>Нельзя повторять одну и ту же попытку «до удачи».</li>
+                        <li>Если не получилось — придумывайте новую отыгровку.</li>
+                        <li>Не лепите несколько разных действий в один <code>/try</code>.</li>
+                    </ul>
+                    <div class="examples">
+                        <p>/try Попытался открыть крышку (Удачно / Неудачно)</p>
+                        <p>/try Попытался перекусить провод (Удачно / Неудачно)</p>
+                    </div>
+                </div>
+                <div class="sub-block">
+                    <h3>4. Команда /roll</h3>
+                    <p><code>/roll</code> — бросок «кости» при столкновении интересов двух игроков.</p>
+                    <div class="examples">
+                        <p>/me попытался схватить руки противника и затянуть их наручниками</p>
+                        <p>// оба игрока используют /roll в диапазоне 0–100</p>
+                        <p>/it Наручники на руках второго игрока затянуты (если результат у вас выше).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- XXIII. Ликбез №4 -->
+        <section class="section" id="likbez-4">
+            <div class="section-header">
+                <div class="section-title">
+                    Ликбез №4 — Памятки и RP-смерти
+                    <span class="code">Ликбез</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="sub-block">
+                    <h3>Памятка №1 — Взаимодействие с игроками</h3>
+                    <p>Если к вам обращаются в RP или делают RP-отыгровку, вы обязаны:</p>
+                    <ul>
+                        <li>ответить в RP-формате (действием или фразой персонажа);</li>
+                        <li>или через <code>/it</code> объяснить, почему персонаж не реагирует (без сознания, не видит, не слышит и т.д.).</li>
+                    </ul>
+                    <p class="muted">
+                        Игнор RP-отыгровок без объяснения — нарушение RP.
+                    </p>
+                </div>
+                <div class="sub-block">
+                    <h3>Памятка №2 — Действия и контрдействия</h3>
+                    <p>Если вы не согласны с RP-действием против вас, вы можете запросить <code>/roll</code> или сами его прописать.</p>
+                    <p class="muted">
+                        Пример: по вам отыгрывают удар — вы прописываете <code>/roll</code>.  
+                        Если результат выше — отыгрываете успешное уклонение; ниже — честно принимаете последствия.
+                    </p>
+                </div>
+                <div class="sub-block">
+                    <h3>Памятка №3 — Правило откатов</h3>
+                    <p><strong>Правило первого отката:</strong> один раз можно откатить одно своё действие без согласия второй стороны (ошибка, миссклик).</p>
+                    <p>Если игрок вылетел во время важной сцены:</p>
+                    <ul>
+                        <li>ситуацию можно временно «заморозить» до возвращения;</li>
+                        <li>или заменить персонажа логичным RP-объяснением (эвакуация, потеря связи и т.п.).</li>
+                    </ul>
+                    <p>Крупные откаты делаются только с одобрения <strong>RP Supervisor+</strong>.</p>
+                    <p class="muted">
+                        Мелкие откаты — через <code>/looc</code>.  
+                        Глобальные — через <code>/ooc</code> или <code>/tellall</code> с согласием RP-ответственных.
+                    </p>
+                </div>
+                <div class="sub-block">
+                    <h3>Памятка №4 — RP-смерти</h3>
+                    <p><strong>Полная RP-смерть (FRPK)</strong> — полный сброс персонажа: имя, звания, должности, история.</p>
+                    <p><strong>Частичная RP-смерть (CK)</strong> — смена никнейма и фактическая смена личности при сохранении части бэкграунда.</p>
+                    <ul>
+                        <li>FRPK применяется только по заявке, одобренной администрацией.</li>
+                        <li>CK оформляется через заявку в Discord-фракции и одобряется куратором/командованием.</li>
+                    </ul>
+                    <p class="muted">
+                        Тип RP-смерти зависит от тяжести нарушения и контекста RP-ситуации.
+                    </p>
+                </div>
+                <div class="footer-note">
+                    Материалы раздела «Ликбезы» обязательны к ознакомлению новобранцев и рекомендуются всем бойцам.
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".tab-button");
+        const tabs = document.querySelectorAll(".tab-content");
+
+        buttons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const targetId = btn.getAttribute("data-tab");
+
+                buttons.forEach(b => b.classList.remove("active"));
+                tabs.forEach(t => t.classList.remove("active"));
+
+                btn.classList.add("active");
+                document.getElementById(targetId).classList.add("active");
+
+                // при переключении вкладки слегка подскроллим вверх к началу контента
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        });
+    });
+</script>
+</body>
+</html>
